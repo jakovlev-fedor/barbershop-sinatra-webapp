@@ -7,6 +7,18 @@ configure do
   enable :sessions
 end
 
+get '/about' do
+  erb :about
+end
+
+get '/contacts' do
+  erb :contacts
+end
+
+get '/lorem' do
+  erb 'Lorem ipsum dolor sit ametzzz'
+end
+
 get '/' do
   erb :home
 end

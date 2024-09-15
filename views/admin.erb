@@ -1,0 +1,44 @@
+<h3>Admin dashboard</h3>
+<h6>Appointments</h6>
+
+<%
+@customers_table = ''
+f = File.open('customers.jsonl', 'r')
+
+@customers_table += "<tbody>"
+
+counter = 1
+while (line = f.gets)
+  hash = JSON.parse(line.strip)
+  key = hash.keys[0]
+  data = hash[key]
+
+  @customers_table += "<tr>"
+  @customers_table += "<th scope='row'>#{counter}</th>"
+  counter += 1
+
+  @customers_table += "<td>#{data['date']}</td>
+                       <td>#{data['time']}</td>
+                       <td>#{data['name']}</td>
+                       <td>#{data['phone']}</td>"
+
+  @customers_table += "</tr>"
+end
+
+@customers_table += "</tbody>"
+
+%>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">date</th>
+      <th scope="col">time</th>
+      <th scope="col">name</th>
+      <th scope="col">phone</th>
+    </tr>
+  </thead>
+
+  <%=@customers_table%>
+</table>

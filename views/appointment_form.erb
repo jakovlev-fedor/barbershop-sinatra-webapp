@@ -1,0 +1,19 @@
+<p>Please fill in the register form</p>
+
+<form action="/appointment/submit" method="POST">
+  <label for="customer_name">Name:</label>
+  <input type="text" id="customer_name" name="customer_name" style="width: 250px;"><br><br>
+
+  <label for="customer_phone">Phone:</label>
+  <input type="tel" id="customer_phone" name="customer_phone" style="width: 250px;"><br><br>
+
+  <label for="appointment_date">Date:</label>
+  <input type="date" id="appointment_date" name="appointment_date" style="width: 250px;"><br><br>
+
+  <label for="appointment_time">Time:</label>
+  <input type="time" id="appointment_time" name="appointment_time" style="width: 250px;"><br><br>
+
+  <button type="submit" class="btn btn-primary">Make an appointment!</button>
+</form>
+<br>
+<a class="btn btn-secondary" href="/index" role="button">Home</a>

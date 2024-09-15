@@ -1,0 +1,26 @@
+<div class="card m-1" style="max-width: 36rem;">
+  <div class="card-header <%= @bg_color %> <%= @font_color %> h6">
+    <%= @error ? @error : 'Enter your credentials' %>
+  </div>
+
+  <div class="card-body">
+      <form action="/login/attempt" method="POST" class="row row-cols-lg-auto g-2 align-items-center">
+        <div class="col-12">
+          <label class="visually-hidden" for="username">Username</label>
+          <input type="text" class="form-control" name='username' placeholder="Username">
+        </div>
+
+        <div class="col-12">
+          <label class="visually-hidden" for="password">Password</label>
+          <input type="password" class="form-control" name='password' placeholder="Password">
+        </div>
+
+        <div class="col-12">
+          <button type='submit' class="btn btn-secondary">Log in</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+
+

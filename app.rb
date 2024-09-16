@@ -98,4 +98,16 @@ helpers do
     f.write("#{buffer.to_json}\n")
     f.close
   end
+
+  def versioned_stylesheet(style = 'style')
+    mtime = File.mtime(File.join(Sinatra::Application.public_dir, 'css', "#{style}.css")).to_i.to_s
+
+    "/css/#{style}.css?" + mtime
+  end
+
+  def versioned_javascript(script = 'script')
+    mtime = File.mtime(File.join(Sinatra::Application.public_dir, 'js', "#{script}.js")).to_i.to_s
+
+    "/js/#{script}.js?" + mtime
+  end
 end

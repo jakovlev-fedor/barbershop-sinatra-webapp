@@ -2,3 +2,23 @@
   padding-left: 2em;
   margin: 3px 6px 0px 6px;
 }
+
+.bs-title {
+  --bs-heading-color: var(--bs-emphasis-color);
+  font-size:calc(1.425rem + 2.1vw)
+}
+@media (min-width: 1200px) {
+  .bs-title {
+    font-size:3rem
+  }
+}
+
+.bs-lead {
+  font-size:calc(1.275rem + .3vw);
+  font-weight: 300;
+}
+
+@media (min-width: 1200px) {
+  .bs-lead {
+    font-size:1.5rem
+  }

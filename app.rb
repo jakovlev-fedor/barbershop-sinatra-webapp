@@ -11,9 +11,7 @@ get '/about' do
   erb :about
 end
 
-get '/contacts' do
-  erb :contacts
-end
+
 
 get '/lorem' do
   erb 'Lorem ipsum dolor sit ametzzz'
@@ -23,6 +21,11 @@ get '/' do
   erb :home
 end
 
+# ===========================+====================+=========================== #
+# ===========================|-- FORMS HANDLING --|=========================== #
+# ===========================+====================+=========================== #
+
+# ------------------------------ APPOINTMENTS -------------------------------- #
 get '/appointment/form' do
   erb :appointment_form
 end
@@ -39,11 +42,29 @@ post '/appointment/submit' do
            date: @appointment_date,
            time: @appointment_time }
 
-  save_appointment(data)
+  save_data(data, 'customers.jsonl')
 
   erb :appointment_submit
 end
 
+# ------------------------------ MESSAGES ------------------------------------ #
+get '/contacts' do
+  erb :contacts
+end
+
+post '/contacts/message' do
+  @email = params[:email]
+  @message = params[:message]
+
+  data = { email: @email,
+           message: @message }
+
+  save_data(data, 'messages.jsonl')
+
+  erb :message_sent
+end
+
+# ------------------------------ LOGIN --------------------------------------- #
 get '/login/form' do
   erb :login_form
 end
@@ -82,6 +103,10 @@ post '/login/attempt' do
   end
 end
 
+# ===========================+====================+=========================== #
+# ===========================|----  METHODS   ----|=========================== #
+# ===========================+====================+=========================== #
+
 helpers do
   def username
     session[:identity] ? session[:identity] : 'Hello stranger'
@@ -92,8 +117,8 @@ helpers do
     t.strftime('%Y%m%d-%H%M%S')
   end
 
-  def save_appointment(data)
-    f = File.open('customers.jsonl', 'a')
+  def save_data(data, fname)
+    f = File.open(fname, 'a')
     buffer = { time_stamp => data }
     f.write("#{buffer.to_json}\n")
     f.close

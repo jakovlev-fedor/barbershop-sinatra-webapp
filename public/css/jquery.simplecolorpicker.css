@@ -13,6 +13,7 @@
  * See https://github.com/twbs/bootstrap/blob/master/less/dropdowns.less
  */
 
+
 .simplecolorpicker.picker {
   position: absolute;
   top: 100%;
@@ -27,7 +28,7 @@
   padding: 5px 0 0 5px;
   margin: 2px 0 0;
   list-style: none;
-  background-color: #fff; /* @dropdown-bg */
+  background-color: #4c4c4c; /* @dropdown-bg */
 
   border: 1px solid #ccc; /* @dropdown-fallback-border */
   border: 1px solid rgba(0, 0, 0, .15); /* @dropdown-border */
@@ -57,9 +58,16 @@
 .simplecolorpicker.icon,
 .simplecolorpicker span.color {
   display: inline-block;
-
   cursor: pointer;
   border: 1px solid transparent;
+}
+
+.simplecolorpicker.icon {
+  width: 1%;
+  min-width: 0;
+  flex: 1 1 auto;
+  border-top-right-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
 }
 
 .simplecolorpicker.icon:after,

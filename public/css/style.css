@@ -1,3 +1,22 @@
+.form-control-color {
+  padding: 0 !important;
+
+  &::color-swatch {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  &::-moz-color-swatch {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+
+  &::-webkit-color-swatch {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}
+
 .form-switch {
   padding-left: 2em;
   margin: 3px 6px 0px 6px;
@@ -7,11 +26,6 @@
   --bs-heading-color: var(--bs-emphasis-color);
   font-size:calc(1.425rem + 2.1vw)
 }
-@media (min-width: 1200px) {
-  .bs-title {
-    font-size:3rem
-  }
-}
 
 .bs-lead {
   font-size:calc(1.275rem + .3vw);
@@ -19,6 +33,11 @@
 }
 
 @media (min-width: 1200px) {
+  .bs-title {
+    font-size:3rem
+  }
+
   .bs-lead {
     font-size:1.5rem
   }
+}

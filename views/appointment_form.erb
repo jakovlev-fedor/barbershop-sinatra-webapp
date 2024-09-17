@@ -36,9 +36,16 @@
       <input class="form-control" type="time" name="appointment_time" placeholder="Time:">
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Choose your favourite color</label>
-      <select class="form-select" name = "colorpicker">
+    <div class="mb-3 input-group">
+      <div class="input-group-text w-75">Boostrap color picker</div>
+      <label class="form-label visually-hidden">Color picker</label>
+      <input type="color" class="form-control form-control-color" value="a4bdfc" title="Choose your color">
+    </div>
+
+    <div class="mb-3 input-group">
+      <div class="input-group-text w-75">jQuery color picker</div>
+      <label class="form-label visually-hidden">Color Picker:</label>
+      <select class="form-select form-control" name = "colorpicker">
         <option selected>Choose your favourite color</option>
         <option value="#7bd148">Green</option>
         <option value="#5484ed">Bold blue</option>
@@ -63,6 +70,6 @@
 
 <script>
   $(function() {
-    $('select[name="colorpicker"]').simplecolorpicker();
+    $('select[name="colorpicker"]').simplecolorpicker({picker: true, theme: 'fontawesome', pickerDelay: 300});
   })
 </script>

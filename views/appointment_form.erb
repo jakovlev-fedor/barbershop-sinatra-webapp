@@ -1,20 +1,43 @@
-<p class="h4">Book now</p>
-<p>Please fill in the register form</p>
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Book now</h4>
+    <p class="bs-lead">Please fill in the register form</p>
+  </div>
+</div>
 
-<form action="/appointment/submit" method="POST">
-  <label for="customer_name">Name:</label>
-  <input type="text" id="customer_name" name="customer_name" style="width: 250px;"><br><br>
+<div class="pt-2 ps-lg-2 w-25">
+  <form action="/appointment/submit" method="POST">
+    <div class="mb-3">
+      <select class="form-select" name = "selected_barber">
+        <option selected>Choose your barber</option>
+        <option value="Walter White">Walter White</option>
+        <option value="Jessie Pinkman">Jessie Pinkman</option>
+        <option value="Gus Fring">Gus Fring</option>
+      </select>
+    </div>
 
-  <label for="customer_phone">Phone:</label>
-  <input type="tel" id="customer_phone" name="customer_phone" style="width: 250px;"><br><br>
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Name:</label>
+      <input class="form-control" type="text" name="customer_name" placeholder="Name:">
+    </div>
 
-  <label for="appointment_date">Date:</label>
-  <input type="date" id="appointment_date" name="appointment_date" style="width: 250px;"><br><br>
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Phone:</label>
+      <input class="form-control"type="tel" name="customer_phone" placeholder="Phone:">
+    </div>
 
-  <label for="appointment_time">Time:</label>
-  <input type="time" id="appointment_time" name="appointment_time" style="width: 250px;"><br><br>
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Date:</label>
+      <input class="form-control" type="date" name="appointment_date" placeholder="Date:">
+    </div>
 
-  <button type="submit" class="btn btn-primary">Make an appointment!</button>
-</form>
-<br>
-<a class="btn btn-secondary" href="/index" role="button">Home</a>
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Time:</label>
+      <input class="form-control" type="time" name="appointment_time" placeholder="Time:">
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Make an appointment!</button>
+    </div>
+  </form>
+</div>

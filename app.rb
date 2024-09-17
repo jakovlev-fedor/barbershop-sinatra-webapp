@@ -32,12 +32,14 @@ end
 
 post '/appointment/submit' do
   @title = 'Success!'
+  @selected_barber = params[:selected_barber]
   @customer_name = params[:customer_name]
   @customer_phone = params[:customer_phone]
   @appointment_date = params[:appointment_date]
   @appointment_time = params[:appointment_time]
 
-  data = { name: @customer_name,
+  data = { barber: @selected_barber,
+           name: @customer_name,
            phone: @customer_phone,
            date: @appointment_date,
            time: @appointment_time }

@@ -1,10 +1,13 @@
-<h1><%= @title %></h1>
-<p>Dear <%= @customer_name %>, <%= @selected_barber %> will be waiting for you on <%= @appointment_date %> at <%= @appointment_time %></p>
-<p>We will contact you by your phone number <%= @customer_phone %> within an hour to confirm your appointment</p>
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Success!</h4>
+    <p class="bs-lead">Dear <%= @customer_name %>, <%= @selected_barber %> will be waiting for you on <%= @appointment_date %> at <%= @appointment_time %><br>
+    We will contact you by your phone number <%= @customer_phone %> within an hour to confirm your appointment</p>
+  </div>
+</div>
 
-<button style="width: 250px;">
-  <a href="/appointment/form">Make another appointment</a>
-</button>
-<button style="width: 250px;">
-  <a href="/">Home</a>
-</button>
+<div class="ps-lg-2">
+  <a class="btn btn-primary" href="/appointment/form">Make another appointment</a>
+  <a class="btn btn-secondary" href="/">Home</a>
+</div>
+

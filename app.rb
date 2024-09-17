@@ -22,7 +22,7 @@ get '/' do
 end
 
 # ===========================+====================+=========================== #
-# ===========================|-- FORMS HANDLING --|=========================== #
+# ===========================|   FORMS HANDLING   |=========================== #
 # ===========================+====================+=========================== #
 
 # ------------------------------ APPOINTMENTS -------------------------------- #
@@ -31,7 +31,6 @@ get '/appointment/form' do
 end
 
 post '/appointment/submit' do
-  @title = 'Success!'
   @selected_barber = params[:selected_barber]
   @customer_name = params[:customer_name]
   @customer_phone = params[:customer_phone]

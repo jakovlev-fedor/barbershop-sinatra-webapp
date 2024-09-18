@@ -15,6 +15,10 @@ get '/playground' do
   erb :playground
 end
 
+get '/color_picker_form' do
+  erb :color_picker_form
+end
+
 get '/lorem' do
   erb 'Lorem ipsum dolor sit ametzzz'
 end

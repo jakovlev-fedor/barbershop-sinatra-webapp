@@ -3,37 +3,17 @@
 require 'sinatra'
 require 'json'
 
-configure do
-  enable :sessions
+get '/' do
+  erb :home
 end
 
 get '/about' do
   erb :about
 end
 
-get '/playground' do
-  erb :playground
-end
-
-get '/color_picker_form' do
-  erb :color_picker_form
-end
-
-get '/serverside_validation_form' do
-  erb :serverside_validation_form
-end
-
-get '/lorem' do
-  erb 'Lorem ipsum dolor sit ametzzz'
-end
-
-get '/' do
-  erb :home
-end
-
-# ===========================+====================+=========================== #
-# ===========================|   FORMS HANDLING   |=========================== #
-# ===========================+====================+=========================== #
+# +========================+========================+========================+ #
+# =========================|     FORMS HANDLING     |========================= #
+# +========================+========================+========================+ #
 
 # ------------------------------ APPOINTMENTS -------------------------------- #
 get '/appointment/form' do
@@ -76,6 +56,11 @@ post '/contacts/message' do
 end
 
 # ------------------------------ LOGIN --------------------------------------- #
+
+configure do
+  enable :sessions
+end
+
 get '/login/form' do
   erb :login_form
 end
@@ -114,9 +99,9 @@ post '/login/attempt' do
   end
 end
 
-# ===========================+====================+=========================== #
-# ===========================|----  METHODS   ----|=========================== #
-# ===========================+====================+=========================== #
+# +========================+========================+========================+ #
+# =========================|        METHODS         |========================= #
+# +========================+========================+========================+ #
 
 helpers do
   def username
@@ -147,3 +132,62 @@ helpers do
     "/js/#{script}.js?" + mtime
   end
 end
+
+# +========================+========================+========================+ #
+# =========================|       PLAYGROUND       |========================= #
+# +========================+========================+========================+ #
+
+get '/playground' do
+  erb :playground
+end
+
+# +========================+========================+========================+ #
+# =========================|    COLOR PICKER FORM   |========================= #
+# +========================+========================+========================+ #
+
+get '/color_picker_form' do
+  erb :color_picker_form
+end
+
+post '/color_picker_form/submit' do
+  erb :color_picker_form_submit
+end
+
+# +==============+==============+==============+==============+==============+ #
+# ===============|         SERVERSIDE VALIDATION FORM         |=============== #
+# +==============+==============+==============+==============+==============+ #
+
+get '/serverside_validation_form' do
+  erb :serverside_validation_form
+end
+
+post '/serverside_validation_form/submit' do
+  @selected_barber = params[:selected_barber]
+  @customer_name = params[:customer_name]
+  @customer_phone = params[:customer_phone]
+  @appointment_date = params[:appointment_date]
+  @appointment_time = params[:appointment_time]
+
+  data = { barber: @selected_barber,
+           name: @customer_name,
+           phone: @customer_phone,
+           date: @appointment_date,
+           time: @appointment_time }
+
+  save_data(data, 'customers.jsonl')
+
+  erb :appointment_submit
+end
+
+# +========================+========================+========================+ #
+# =========================|         DEBUG          |========================= #
+# +========================+========================+========================+ #
+
+get '/lorem' do
+  erb 'Lorem ipsum dolor sit ametzzz'
+end
+
+# +========================+========================+========================+ #
+# +==============+==============+==============+==============+==============+ #
+# +====+====+====+====+====+====+====+====+====+====+====+====+====+====+====+ #
+# +==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+==+ #

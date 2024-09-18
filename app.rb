@@ -19,6 +19,10 @@ get '/color_picker_form' do
   erb :color_picker_form
 end
 
+get '/serverside_validation_form' do
+  erb :serverside_validation_form
+end
+
 get '/lorem' do
   erb 'Lorem ipsum dolor sit ametzzz'
 end

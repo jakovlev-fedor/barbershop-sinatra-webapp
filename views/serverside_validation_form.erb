@@ -1,0 +1,53 @@
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Book now</h4>
+    <p class="bs-lead">Please fill in the register form</p>
+  </div>
+</div>
+
+<div class="pt-2 ps-lg-2 w-25">
+  <form action="/appointment/submit" method="POST">
+    <div class="mb-3">
+      <select class="form-select" name = "selected_barber">
+        <option value="" selected disabled>Choose your barber...</option>
+        <option value="Walter White">Walter White</option>
+        <option value="Jessie Pinkman">Jessie Pinkman</option>
+        <option value="Gus Fring">Gus Fring</option>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please select a barber.</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Name:</label>
+      <input class="form-control" type="text" name="customer_name" placeholder="Name:">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your name.</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Phone:</label>
+      <input class="form-control"type="tel" name="customer_phone" placeholder="Phone:">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your phone.</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Date:</label>
+      <input class="form-control" type="date" name="appointment_date" placeholder="Date:">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the date of your appointment</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Time:</label>
+      <input class="form-control" type="time" name="appointment_time" placeholder="Time:">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the time of your appointment</div>
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Make an appointment!</button>
+    </div>
+  </form>
+</div>

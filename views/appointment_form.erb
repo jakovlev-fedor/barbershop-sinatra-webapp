@@ -6,47 +6,57 @@
 </div>
 
 <div class="pt-2 ps-lg-2 w-25">
-  <form action="/appointment/submit" method="POST">
+  <form action="/appointment/submit" method="POST" class="needs-validation" novalidate>
     <div class="mb-3">
-      <select class="form-select" name = "selected_barber">
-        <option selected>Choose your barber</option>
+      <select class="form-select" name = "selected_barber"  required>
+        <option value="" selected disabled>Choose your barber...</option>
         <option value="Walter White">Walter White</option>
         <option value="Jessie Pinkman">Jessie Pinkman</option>
         <option value="Gus Fring">Gus Fring</option>
       </select>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please select a barber.</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Name:</label>
-      <input class="form-control" type="text" name="customer_name" placeholder="Name:">
+      <input class="form-control" type="text" name="customer_name" placeholder="Name:" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your name.</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Phone:</label>
-      <input class="form-control"type="tel" name="customer_phone" placeholder="Phone:">
+      <input class="form-control"type="tel" name="customer_phone" placeholder="Phone:" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your phone.</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Date:</label>
-      <input class="form-control" type="date" name="appointment_date" placeholder="Date:">
+      <input class="form-control" type="date" name="appointment_date" placeholder="Date:" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the date of your appointment</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Time:</label>
-      <input class="form-control" type="time" name="appointment_time" placeholder="Time:">
+      <input class="form-control" type="time" name="appointment_time" placeholder="Time:" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter the time of your appointment</div>
     </div>
 
     <div class="mb-3 input-group">
       <div class="input-group-text w-75">Boostrap color picker</div>
       <label class="form-label visually-hidden">Color picker</label>
-      <input type="color" class="form-control form-control-color" value="a4bdfc" title="Choose your color">
+      <input type="color" class="form-control form-control-color" value="#3584e4" title="Choose your color">
     </div>
 
     <div class="mb-3 input-group">
       <div class="input-group-text w-75">jQuery color picker</div>
       <label class="form-label visually-hidden">Color Picker:</label>
       <select class="form-select form-control" name = "colorpicker">
-        <option selected>Choose your favourite color</option>
+        <option value="#3584e4"selected>Choose your favourite color</option>
         <option value="#7bd148">Green</option>
         <option value="#5484ed">Bold blue</option>
         <option value="#a4bdfc">Blue</option>
@@ -72,4 +82,22 @@
   $(function() {
     $('select[name="colorpicker"]').simplecolorpicker({picker: true, theme: 'fontawesome', pickerDelay: 300});
   })
+</script>
+
+<script>
+  (() => {
+  'use strict'
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+  // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
 </script>

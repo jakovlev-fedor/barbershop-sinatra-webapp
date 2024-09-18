@@ -1,6 +1,14 @@
 .form-control-color {
   padding: 0 !important;
 
+  &:valid {
+    width: 25% !important;
+  }
+
+  &:invalid {
+    width: 25% !important;
+  }
+
   &::color-swatch {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;

@@ -46,43 +46,11 @@
       <div class="invalid-feedback">Please enter the time of your appointment</div>
     </div>
 
-    <div class="mb-3 input-group">
-      <div class="input-group-text w-75">Boostrap color picker</div>
-      <label class="form-label visually-hidden">Color picker</label>
-      <input type="color" class="form-control form-control-color" value="#3584e4" title="Choose your color">
-    </div>
-
-    <div class="mb-3 input-group">
-      <div class="input-group-text w-75">jQuery color picker</div>
-      <label class="form-label visually-hidden">Color Picker:</label>
-      <select class="form-select form-control" name = "colorpicker">
-        <option value="#3584e4"selected>Choose your favourite color</option>
-        <option value="#7bd148">Green</option>
-        <option value="#5484ed">Bold blue</option>
-        <option value="#a4bdfc">Blue</option>
-        <option value="#46d6db">Turquoise</option>
-        <option value="#7ae7bf">Light green</option>
-        <option value="#51b749">Bold green</option>
-        <option value="#fbd75b">Yellow</option>
-        <option value="#ffb878">Orange</option>
-        <option value="#ff887c">Red</option>
-        <option value="#dc2127">Bold red</option>
-        <option value="#dbadff">Purple</option>
-        <option value="#e1e1e1">Gray</option>
-      </select>
-    </div>
-
     <div class="mb-3">
       <button type="submit" class="btn btn-primary">Make an appointment!</button>
     </div>
   </form>
 </div>
-
-<script>
-  $(function() {
-    $('select[name="colorpicker"]').simplecolorpicker({picker: true, theme: 'fontawesome', pickerDelay: 300});
-  })
-</script>
 
 <script>
   (() => {

@@ -11,7 +11,9 @@ get '/about' do
   erb :about
 end
 
-
+get '/playground' do
+  erb :playground
+end
 
 get '/lorem' do
   erb 'Lorem ipsum dolor sit ametzzz'

@@ -8,42 +8,37 @@
 <div class="pt-2 ps-lg-2 w-25">
   <form action="/serverside_validation_form/submit" method="POST">
     <div class="mb-3">
-      <select class="form-select" name = "selected_barber">
-        <option value="" selected disabled>Choose your barber...</option>
+      <select class="form-select" name = "selected_barber" id="barber_select">
+        <option value="" selected disabled hidden>Choose your barber:</option>
         <option value="Walter White">Walter White</option>
         <option value="Jessie Pinkman">Jessie Pinkman</option>
         <option value="Gus Fring">Gus Fring</option>
       </select>
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please select a barber.</div>
+      <%= @data_incomplete ? show_response(@validation_response[:selected_barber]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Name:</label>
-      <input class="form-control" type="text" name="customer_name" placeholder="Name:">
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter your name.</div>
+      <input class="form-control" type="text" name="customer_name" placeholder="Name:" value="<%= @data[:customer_name] %>">
+      <%= @data_incomplete ? show_response(@validation_response[:customer_name]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Phone:</label>
-      <input class="form-control"type="tel" name="customer_phone" placeholder="Phone:">
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter your phone.</div>
+      <input class="form-control" type="tel" name="customer_phone" placeholder="Phone:" value="<%= @data[:customer_phone] %>">
+      <%= @data_incomplete ? show_response(@validation_response[:customer_phone]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Date:</label>
-      <input class="form-control" type="date" name="appointment_date" placeholder="Date:">
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter the date of your appointment</div>
+      <input class="form-control" type="date" name="appointment_date" placeholder="Date:" value="<%= @data[:appointment_date] %>">
+      <%= @data_incomplete ? show_response(@validation_response[:appointment_date]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Time:</label>
-      <input class="form-control" type="time" name="appointment_time" placeholder="Time:">
-      <div class="valid-feedback">Looks good!</div>
-      <div class="invalid-feedback">Please enter the time of your appointment</div>
+      <input class="form-control" type="time" name="appointment_time" placeholder="Time:" value="<%= @data[:appointment_time] %>">
+      <%= @data_incomplete ? show_response(@validation_response[:appointment_time]) : '' %>
     </div>
 
     <div class="mb-3">
@@ -51,3 +46,14 @@
     </div>
   </form>
 </div>
+
+
+
+<script>
+  function selectElement(id, valueToSelect) {
+    let selectForm = document.getElementById(id);
+    selectForm.value = valueToSelect;
+  }
+
+  selectElement('barber_select', '<%= @data[:selected_barber] %>');
+</script>

@@ -131,6 +131,36 @@ helpers do
 
     "/js/#{script}.js?" + mtime
   end
+
+  def show_response(response)
+    if response == 'Looks good!'
+      "<div class='alert alert-success alert-validation-invalid'>#{response}</div>"
+    else
+      "<div class='alert alert-danger alert-validation-invalid'>#{response}</div>"
+    end
+  end
+
+  def data_incomplete?(params)
+    params.each_key do |key|
+      return true if params[key] == '' || params[key].nil?
+    end
+
+    false
+  end
+
+  def get_validation_response(params)
+    error_messages = {}
+
+    params.each_key do |key|
+      if params[key] == '' || params[key].nil?
+        error_messages[key.to_sym] = 'This field is required!'
+      else
+        error_messages[key.to_sym] = 'Looks good!'
+      end
+    end
+
+    error_messages
+  end
 end
 
 # +========================+========================+========================+ #
@@ -158,25 +188,23 @@ end
 # +==============+==============+==============+==============+==============+ #
 
 get '/serverside_validation_form' do
+  @data = {}
   erb :serverside_validation_form
 end
 
 post '/serverside_validation_form/submit' do
-  @selected_barber = params[:selected_barber]
-  @customer_name = params[:customer_name]
-  @customer_phone = params[:customer_phone]
-  @appointment_date = params[:appointment_date]
-  @appointment_time = params[:appointment_time]
+  puts params[:selected_barber]
+  @data = params.dup
 
-  data = { barber: @selected_barber,
-           name: @customer_name,
-           phone: @customer_phone,
-           date: @appointment_date,
-           time: @appointment_time }
+  @data_incomplete = data_incomplete?(params)
+  @validation_response = get_validation_response(params) if @data_incomplete
+  puts @validation_response
 
-  save_data(data, 'customers.jsonl')
+  return erb :serverside_validation_form if @data_incomplete
 
-  erb :appointment_submit
+  save_data(@data, 'customers_svf.jsonl')
+
+  erb :serverside_validation_form_submit
 end
 
 # +========================+========================+========================+ #

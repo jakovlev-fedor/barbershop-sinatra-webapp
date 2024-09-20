@@ -1,3 +1,7 @@
+.alert-validation-invalid {
+  padding: .375rem .75rem !important;
+}
+
 .form-control-color {
   padding: 0 !important;
 

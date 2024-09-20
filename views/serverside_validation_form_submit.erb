@@ -1,0 +1,12 @@
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Success!</h4>
+    <p class="bs-lead">Dear <%= @data[:customer_name] %>, <%= @data[:selected_barber] %> will be waiting for you on <%= @data[:appointment_date] %> at <%= @data[:appointment_time] %><br>
+    We will contact you by your phone number <%= @data[:customer_phone] %> within an hour to confirm your appointment</p>
+  </div>
+</div>
+
+<div class="ps-lg-2">
+  <a class="btn btn-primary" href="/serverside_validation_form">Make another appointment</a>
+  <a class="btn btn-secondary" href="/">Home</a>
+</div>

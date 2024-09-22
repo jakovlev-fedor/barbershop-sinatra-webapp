@@ -132,14 +132,6 @@ helpers do
     "/js/#{script}.js?" + mtime
   end
 
-  def show_response(response)
-    if response == 'Looks good!'
-      "<div class='alert alert-success alert-validation-invalid'>#{response}</div>"
-    else
-      "<div class='alert alert-danger alert-validation-invalid'>#{response}</div>"
-    end
-  end
-
   def data_incomplete?(params)
     params.each_key do |key|
       return true if params[key] == '' || params[key].nil?
@@ -160,6 +152,14 @@ helpers do
     end
 
     error_messages
+  end
+
+  def show_response(response)
+    if response == 'Looks good!'
+      "<div class='alert alert-success alert-validation-invalid'>#{response}</div>"
+    else
+      "<div class='alert alert-danger alert-validation-invalid'>#{response}</div>"
+    end
   end
 end
 

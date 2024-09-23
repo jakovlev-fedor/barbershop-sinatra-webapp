@@ -2,6 +2,37 @@
 
 require 'sinatra'
 require 'json'
+require 'pony'
+
+configure :development do
+  enable :sessions
+
+  set :email_options,
+      { via: :smtp,
+        via_options:
+        { address: 'smtp.gmail.com',
+          port: '587',
+          domain: 'localhost.localdomain',
+          enable_starttls_auto: true,
+          authentication: :plain,
+          user_name: ENV['G_MAIL'],
+          password: ENV['G_PASS'] } }
+end
+
+configure :production do
+  enable :sessions
+
+  set :email_options,
+      { via: :smtp,
+        via_options:
+        { address: 'smtp.sendgrid.net',
+          port: '587',
+          domain: 'heroku.com',
+          enable_starttls_auto: true,
+          authentication: :plain,
+          user_name: ENV['SENDGRID_USERNAME'],
+          password: ENV['SENDGRID_PASSWORD'] } }
+end
 
 get '/' do
   erb :home
@@ -52,14 +83,18 @@ post '/contacts/message' do
 
   save_data(data, 'messages.jsonl')
 
+  Pony.options = settings.email_options
+
+  Pony.mail(from: ENV['G_MAIL'],
+            reply_to: @email,
+            to: ENV['G_MAIL'],
+            subject: 'BarberShop customer has contacted you',
+            body: @message)
+
   erb :message_sent
 end
 
 # ------------------------------ LOGIN --------------------------------------- #
-
-configure do
-  enable :sessions
-end
 
 get '/login/form' do
   erb :login_form
@@ -141,15 +176,13 @@ helpers do
   end
 
   def get_validation_response(params)
-    error_messages = {}
+    error_messages = { selected_barber: 'You need to select a barber',
+                       customer_name: 'You need to enter your name',
+                       customer_phone: 'Please provide us with your phone number',
+                       appointment_date: 'Please specify a date of your visit',
+                       appointment_time: 'Please specify your visit time' }
 
-    params.each_key do |key|
-      if params[key] == '' || params[key].nil?
-        error_messages[key.to_sym] = 'This field is required!'
-      else
-        error_messages[key.to_sym] = 'Looks good!'
-      end
-    end
+    error_messages.reject { |key| params[key] == '' }.each_key { |key| error_messages[key] = 'Looks good!' }
 
     error_messages
   end
@@ -193,12 +226,10 @@ get '/serverside_validation_form' do
 end
 
 post '/serverside_validation_form/submit' do
-  puts params[:selected_barber]
   @data = params.dup
 
   @data_incomplete = data_incomplete?(params)
   @validation_response = get_validation_response(params) if @data_incomplete
-  puts @validation_response
 
   return erb :serverside_validation_form if @data_incomplete
 

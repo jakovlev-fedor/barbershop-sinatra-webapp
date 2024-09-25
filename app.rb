@@ -4,6 +4,10 @@ require 'sinatra'
 require 'json'
 require 'pony'
 
+# +========================+========================+========================+ #
+# =========================|     CONFIGURATION      |========================= #
+# +========================+========================+========================+ #
+
 configure :development do
   enable :sessions
 
@@ -34,6 +38,10 @@ configure :production do
           password: ENV['SENDGRID_PASSWORD'] } }
 end
 
+# +========================+========================+========================+ #
+# =========================|         NAVBAR         |========================= #
+# +========================+========================+========================+ #
+
 get '/' do
   erb :home
 end
@@ -42,16 +50,24 @@ get '/about' do
   erb :about
 end
 
+get '/appointments' do
+  erb :appointments
+end
+
+get '/contacts' do
+  erb :contacts
+end
+
 # +========================+========================+========================+ #
 # =========================|     FORMS HANDLING     |========================= #
 # +========================+========================+========================+ #
 
 # ------------------------------ APPOINTMENTS -------------------------------- #
-get '/appointment/form' do
-  erb :appointment_form
+get '/appointments/form' do
+  erb :appointments_form
 end
 
-post '/appointment/submit' do
+post '/appointments/submit' do
   @selected_barber = params[:selected_barber]
   @customer_name = params[:customer_name]
   @customer_phone = params[:customer_phone]
@@ -66,32 +82,30 @@ post '/appointment/submit' do
 
   save_data(data, 'customers.jsonl')
 
-  erb :appointment_submit
+  erb :appointments_submit
 end
 
-# ------------------------------ MESSAGES ------------------------------------ #
-get '/contacts' do
-  erb :contacts
+# --------------------------------- MESSAGES --------------------------------- #
+
+get '/contacts/messages' do
+  erb :messages
 end
 
-post '/contacts/message' do
-  @email = params[:email]
-  @message = params[:message]
+get '/contacts/messages/form' do
+  erb :messages_form
+end
 
-  data = { email: @email,
-           message: @message }
-
-  save_data(data, 'messages.jsonl')
-
+post '/contacts/messages/submit' do
   Pony.options = settings.email_options
 
   Pony.mail(from: ENV['G_MAIL'],
-            reply_to: @email,
+            reply_to: params[:email],
             to: ENV['G_MAIL'],
-            subject: 'BarberShop customer has contacted you',
-            body: @message)
+            subject: "#{params[:name]} has contacted you trough BarberShop webpage",
+            body: params[:message])
 
-  erb :message_sent
+  save_data(params, 'messages.jsonl')
+  erb :messages_submit
 end
 
 # ------------------------------ LOGIN --------------------------------------- #

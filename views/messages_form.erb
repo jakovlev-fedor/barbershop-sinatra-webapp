@@ -1,0 +1,21 @@
+<div class="ps-lg-2">
+  <h5>Message:</h5>
+  <form action="/contacts/messages/submit" method="POST">
+        <div class="mb-3">
+      <label class="form-label visually-hidden">Your name</label>
+      <input type="text" name="name" class="form-control w-25" placeholder="Enter your name: ">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Email address</label>
+      <input type="email" name="email" class="form-control w-25" placeholder="Enter your email: ">
+    </div>
+
+    <div>
+      <label class="form-label visually-hidden">Message</label>
+      <textarea name="message" class="form-control w-25" rows="3" placeholder="Enter your message:"></textarea>
+    </div>
+
+    <button type="submit" class="mt-1 btn btn-primary">Submit</button>
+  </form>
+</div>

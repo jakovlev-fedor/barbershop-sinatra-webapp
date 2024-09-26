@@ -60,3 +60,6 @@ customers.jsonl
 customers_svf.jsonl
 gmail_pass.txt
 mail_pass.txt
+commands.sql
+memory.sqlite
+test.sqlite

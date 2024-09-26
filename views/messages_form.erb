@@ -1,21 +1,53 @@
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Message us</h4>
+    <p class="bs-lead">Please fill in the form</p>
+  </div>
+</div>
+
 <div class="ps-lg-2">
-  <h5>Message:</h5>
-  <form action="/contacts/messages/submit" method="POST">
+  <form action="/contacts/messages/submit" method="POST" class="needs-validation" novalidate>
         <div class="mb-3">
       <label class="form-label visually-hidden">Your name</label>
-      <input type="text" name="name" class="form-control w-25" placeholder="Enter your name: ">
+      <input type="text" name="name" class="form-control w-25" placeholder="Enter your name: " required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your name.</div>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Email address</label>
-      <input type="email" name="email" class="form-control w-25" placeholder="Enter your email: ">
+      <input type="email" name="email" class="form-control w-25" placeholder="Enter your email: " required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your email address.</div>
     </div>
 
-    <div>
+    <div class="mb-3">
       <label class="form-label visually-hidden">Message</label>
-      <textarea name="message" class="form-control w-25" rows="3" placeholder="Enter your message:"></textarea>
+      <textarea name="message" class="form-control w-25" rows="3" placeholder="Enter your message:" required></textarea>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your message.</div>
     </div>
 
-    <button type="submit" class="mt-1 btn btn-primary">Submit</button>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </div>
+
+<script>
+  (() => {
+  'use strict'
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+  // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+</script>

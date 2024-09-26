@@ -96,13 +96,7 @@ get '/contacts/messages/form' do
 end
 
 post '/contacts/messages/submit' do
-  Pony.options = settings.email_options
-
-  Pony.mail(from: ENV['G_MAIL'],
-            reply_to: params[:email],
-            to: ENV['G_MAIL'],
-            subject: "#{params[:name]} has contacted you trough BarberShop webpage",
-            body: params[:message])
+  send_mail(params, ENV)
 
   save_data(params, 'messages.jsonl')
   erb :messages_submit
@@ -189,16 +183,17 @@ helpers do
     false
   end
 
-  def get_validation_response(params)
-    error_messages = { selected_barber: 'You need to select a barber',
-                       customer_name: 'You need to enter your name',
-                       customer_phone: 'Please provide us with your phone number',
-                       appointment_date: 'Please specify a date of your visit',
-                       appointment_time: 'Please specify your visit time' }
-
+  def get_validation_response(params, error_messages)
     error_messages.reject { |key| params[key] == '' }.each_key { |key| error_messages[key] = 'Looks good!' }
 
     error_messages
+  end
+
+  def validation_result(params)
+    result = {}
+    params.each_key { |key| params[key] == '' ? result[key.to_sym] = false : result[key.to_sym] = true }
+    puts result
+    result
   end
 
   def show_response(response)
@@ -207,6 +202,16 @@ helpers do
     else
       "<div class='alert alert-danger alert-validation-invalid'>#{response}</div>"
     end
+  end
+
+  def send_mail(params, env)
+    Pony.options = settings.email_options
+
+    Pony.mail(from: env['G_MAIL'],
+              reply_to: params[:email],
+              to: env['G_MAIL'],
+              subject: "#{params[:name]} has contacted you trough BarberShop webpage",
+              body: params[:message])
   end
 end
 
@@ -242,14 +247,48 @@ end
 post '/serverside_validation_form/submit' do
   @data = params.dup
 
-  @data_incomplete = data_incomplete?(params)
-  @validation_response = get_validation_response(params) if @data_incomplete
+  if data_incomplete?(@data)
+    error_messages = { selected_barber: 'You need to select a barber',
+                       customer_name: 'You need to enter your name',
+                       customer_phone: 'Please provide us with your phone number',
+                       appointment_date: 'Please specify a date of your visit',
+                       appointment_time: 'Please specify your visit time' }
 
-  return erb :serverside_validation_form if @data_incomplete
+    @validation_response = get_validation_response(@data, error_messages)
+    return erb :serverside_validation_form
+  end
 
   save_data(@data, 'customers_svf.jsonl')
 
   erb :serverside_validation_form_submit
+end
+
+# +==============+==============+==============+==============+==============+ #
+# ===============|    SERVERSIDE VALIDATION MESSAGES FORM     |=============== #
+# +==============+==============+==============+==============+==============+ #
+get '/sv/messages' do
+  erb :sv_messages
+end
+
+get '/sv/messages/form' do
+  @data = {}
+  @was_validated = false
+  erb :sv_messages_form
+end
+
+post '/sv/messages/submit' do
+  @data = params.dup
+
+  @was_validated = false
+  if data_incomplete?(params)
+    @was_validated = true
+    @is_valid = validation_result(params)
+    return erb :sv_messages_form
+  end
+
+  save_data(params, 'messages.jsonl')
+  send_mail(params, ENV)
+  erb :sv_messages_submit
 end
 
 # +========================+========================+========================+ #

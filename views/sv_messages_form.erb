@@ -1,0 +1,40 @@
+<div class="pt-2 ps-lg-2">
+  <div class="mb-3">
+    <h4 class="bs-title mb-0">Message  (serverside validation)</h4>
+    <p class="bs-lead">Please fill in the form</p>
+  </div>
+</div>
+
+<div class="ps-lg-2">
+  <form action="/sv/messages/submit" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+      <label class="form-label visually-hidden">Your name</label>
+      <input type="text" name="name" placeholder="Enter your name: " 
+             value="<%= @data[:name] %>" required
+             class="form-control w-25 <%= @was_validated ? (@is_valid[:name] ? 'is-valid' : 'is-invalid') : '' %>">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your name.</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Email address</label>
+      <input type="email"  placeholder="Enter your email: " name="email"
+             value="<%= @data[:email] %>" required
+             class="form-control w-25 <%= @was_validated ? (@is_valid[:email] ? 'is-valid' : 'is-invalid') : '' %>">
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your email address.</div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label visually-hidden">Message</label>
+      <textarea name="message" rows="3" placeholder="Enter your message:" required
+                class="form-control w-25 <%= @was_validated ? (@is_valid[:message] ? 'is-valid' : 'is-invalid') : '' %>"><%= @data[:message] %></textarea>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Please enter your message.</div>
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>

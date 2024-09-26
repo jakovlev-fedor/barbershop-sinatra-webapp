@@ -14,31 +14,31 @@
         <option value="Jessie Pinkman">Jessie Pinkman</option>
         <option value="Gus Fring">Gus Fring</option>
       </select>
-      <%= @data_incomplete ? show_response(@validation_response[:selected_barber]) : '' %>
+      <%= @was_validated ? show_response(@validation_response[:selected_barber]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Name:</label>
       <input class="form-control" type="text" name="customer_name" placeholder="Name:" value="<%= @data[:customer_name] %>">
-      <%= @data_incomplete ? show_response(@validation_response[:customer_name]) : '' %>
+      <%= @was_validated ? show_response(@validation_response[:customer_name]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Phone:</label>
       <input class="form-control" type="tel" name="customer_phone" placeholder="Phone:" value="<%= @data[:customer_phone] %>">
-      <%= @data_incomplete ? show_response(@validation_response[:customer_phone]) : '' %>
+      <%= @was_validated ? show_response(@validation_response[:customer_phone]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Date:</label>
       <input class="form-control" type="date" name="appointment_date" placeholder="Date:" value="<%= @data[:appointment_date] %>">
-      <%= @data_incomplete ? show_response(@validation_response[:appointment_date]) : '' %>
+      <%= @was_validated ? show_response(@validation_response[:appointment_date]) : '' %>
     </div>
 
     <div class="mb-3">
       <label class="form-label visually-hidden">Time:</label>
       <input class="form-control" type="time" name="appointment_time" placeholder="Time:" value="<%= @data[:appointment_time] %>">
-      <%= @data_incomplete ? show_response(@validation_response[:appointment_time]) : '' %>
+      <%= @was_validated ? show_response(@validation_response[:appointment_time]) : '' %>
     </div>
 
     <div class="mb-3">

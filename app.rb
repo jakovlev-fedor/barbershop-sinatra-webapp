@@ -247,13 +247,14 @@ end
 post '/serverside_validation_form/submit' do
   @data = params.dup
 
+  @was_validated = false
   if data_incomplete?(@data)
+    @was_validated = true
     error_messages = { selected_barber: 'You need to select a barber',
                        customer_name: 'You need to enter your name',
                        customer_phone: 'Please provide us with your phone number',
                        appointment_date: 'Please specify a date of your visit',
                        appointment_time: 'Please specify your visit time' }
-
     @validation_response = get_validation_response(@data, error_messages)
     return erb :serverside_validation_form
   end

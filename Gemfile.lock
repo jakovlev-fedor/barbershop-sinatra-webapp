@@ -15,6 +15,7 @@ GEM
       net-pop
       net-smtp
     mini_mime (1.1.5)
+    mini_portile2 (2.8.7)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     net-imap (0.4.9.1)
@@ -50,6 +51,9 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    sqlite3 (2.1.0)
+      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.1.0-x86_64-linux-gnu)
     tilt (2.4.0)
     timeout (0.4.1)
     webrick (1.8.1)
@@ -66,6 +70,7 @@ DEPENDENCIES
   rake
   rerun
   sinatra
+  sqlite3
 
 BUNDLED WITH
    2.5.18

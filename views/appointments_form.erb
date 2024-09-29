@@ -10,9 +10,7 @@
     <div class="mb-3">
       <select class="form-select" name = "selected_barber"  required>
         <option value="" selected disabled>Choose your barber...</option>
-        <option value="Walter White">Walter White</option>
-        <option value="Jessie Pinkman">Jessie Pinkman</option>
-        <option value="Gus Fring">Gus Fring</option>
+        <%= barbers_list %>
       </select>
       <div class="valid-feedback">Looks good!</div>
       <div class="invalid-feedback">Please select a barber.</div>

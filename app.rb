@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'json'
 require 'pony'
+require 'sqlite3'
 
 # +========================+========================+========================+ #
 # =========================|     CONFIGURATION      |========================= #
@@ -63,6 +64,33 @@ end
 # +========================+========================+========================+ #
 
 # ------------------------------ APPOINTMENTS -------------------------------- #
+helpers do
+  def execute_select_statement(sql)
+    return nil unless sql[0..5].upcase == 'SELECT'
+
+    db = SQLite3::Database.open 'barbershop.db'
+    results = db.execute(sql)
+    db.close
+
+    return results unless results == []
+
+    nil
+  end
+
+  def barbers_list
+    sql = 'SELECT barber_name FROM barbers ORDER BY barber_name ASC'
+    arr = execute_select_statement(sql).flatten
+
+    html = ''
+
+    arr.each do |barber|
+      html += "<option value='#{barber}'>#{barber}</option> \n"
+    end
+
+    html
+  end
+end
+
 get '/appointments/form' do
   erb :appointments_form
 end
@@ -152,8 +180,7 @@ helpers do
   end
 
   def time_stamp
-    t = Time.now
-    t.strftime('%Y%m%d-%H%M%S')
+    Time.now.strftime('%F %T.%N %z')
   end
 
   def save_data(data, fname)
